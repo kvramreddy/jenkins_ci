@@ -33,7 +33,7 @@ artifactory_upload() {
   expression=$1
 
   echo "Checking if ${expression} exists..."
-  binary_exists=$(JFROG_CLI_LOG_LEVEL=ERROR jfrog rt s "${H4CI_PUBLISHER_REPO}/${H4CI_TAG}/${expression}" | jq -r '.[].path' | wc -l)
+  binary_exists=$(JFROG_CLI_LOG_LEVEL=ERROR jfrog rt s "${H4CI_PUBLISHER_REPO}/${expression}" | jq -r '.[].path' | wc -l)
   echo $binary_exists
   if [ "${binary_exists}" -eq "0" ]; then
     echo "Uploading to ${H4CI_PUBLISHER_REPO}/${H4CI_TAG}/"
