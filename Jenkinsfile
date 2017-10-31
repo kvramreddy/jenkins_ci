@@ -36,7 +36,7 @@ pipeline {
         body: """<p>SUCCESSFUL: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]':</p>
         <br> </br>
         <p>Check console output at &QUOT;<a href='${env.BUILD_URL}'>${env.JOB_NAME} [${env.BUILD_NUMBER}]</a>&QUOT;</p>""",
-        to: 'vkorpolu@***REMOVED***analytics.com'
+        to: 'vkorpolu@tetrationanalytics.com'
       )
     }
   }

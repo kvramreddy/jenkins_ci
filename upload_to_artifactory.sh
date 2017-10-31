@@ -47,13 +47,13 @@ artifactory_upload() {
 args "$@"
 
 echo "==> Uploading mother rpm build"
-artifactory_upload "${H4CI_TAG}/***REMOVED***_os_mother_rpm_k9-${H4CI_TAG}-1.el6.x86_64.rpm"
-artifactory_upload "${H4CI_TAG}/***REMOVED***_os_adhoc_k9-${H4CI_TAG}-1.el6.x86_64.rpm"
+artifactory_upload "${H4CI_TAG}/tetration_os_mother_rpm_k9-${H4CI_TAG}-1.el6.x86_64.rpm"
+artifactory_upload "${H4CI_TAG}/tetration_os_adhoc_k9-${H4CI_TAG}-1.el6.x86_64.rpm"
 artifactory_upload "${H4CI_TAG}/tet_updater-${H4CI_TAG}-1.el6.x86_64.rpm"
-artifactory_upload "${H4CI_TAG}/***REMOVED***_os_UcsFirmware_k9-2.0.10e.rpm"
+artifactory_upload "${H4CI_TAG}/tetration_os_UcsFirmware_k9-2.0.10e.rpm"
 
 echo "==> Uploading qcow rpm"
-artifactory_upload "${H4CI_TAG}/***REMOVED***_os_qcow_k9-${H4CI_TAG}-1.x86_64.rpm"
+artifactory_upload "${H4CI_TAG}/tetration_os_qcow_k9-${H4CI_TAG}-1.x86_64.rpm"
 
 echo "==> Uploading qcow images"
 artifactory_upload "${H4CI_TAG}/*${H4CI_TAG}.qcow2"
@@ -62,6 +62,6 @@ echo "==> Copying foundation rpms"
 artifactory_upload "${H4CI_TAG}/*${H4CI_TAG}-1*.rpm"
 
 echo "==> Copy ERSPAN OVA from union-local"
-ERSPAN_OVA=$(JFROG_CLI_LOG_LEVEL=ERROR jfrog rt s '\"union-local/erspan/erspan*\"'  --props=version=latest | jq '.[].path')
+ERSPAN_OVA=$(JFROG_CLI_LOG_LEVEL=ERROR jfrog rt s union-local/erspan/erspan*  --props=version=latest | jq '.[].path')
 echo $ERSPAN_OVA
 echo jfrog rt cp ${ERSPAN_OVA} "${H4CI_PUBLISHER_REPO}/${H4CI_TAG}/"
