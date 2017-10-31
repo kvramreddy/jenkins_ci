@@ -22,7 +22,7 @@ pipeline {
       agent { label 'el-7' }
       steps {
         sh '''
-          ./upload_to_artifactory.sh "${params.h4ciTag}" "${params.h4ciPublisherRepo}"
+          ./upload_to_artifactory.sh "${h4ciTag}" "${h4ciPublisherRepo}"
         '''
       }
 
