@@ -34,7 +34,7 @@ pipeline {
       emailext (
         subject: "SUCCESSFUL: Release build ${h4ciTag}",
         body: """<p>SUCCESSFUL: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]':</p>
-        <br> ${output} </br>
+        <br> </br>
         <p>Check console output at &QUOT;<a href='${env.BUILD_URL}'>${env.JOB_NAME} [${env.BUILD_NUMBER}]</a>&QUOT;</p>""",
         to: 'vkorpolu@tetrationanalytics.com'
       )
