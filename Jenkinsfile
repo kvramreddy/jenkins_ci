@@ -21,7 +21,9 @@ pipeline {
     stage('STEP1'){
       agent { label 'el-7' }
       steps {
-        ./upload_to_artifactory.sh "${params.h4ciTag}" "${params.h4ciPublisherRepo}"
+        sh '''
+          ./upload_to_artifactory.sh "${params.h4ciTag}" "${params.h4ciPublisherRepo}"
+        '''
       }
 
     }
