@@ -62,6 +62,6 @@ echo "==> Copying foundation rpms"
 artifactory_upload "${H4CI_TAG}/*${H4CI_TAG}-1*.rpm"
 
 echo "==> Copy ERSPAN OVA from union-local"
-ERSPAN_OVA=$(JFROG_CLI_LOG_LEVEL=ERROR jfrog rt s '\"union-local/erspan/erspan*\"'  --props=version=latest | jq '.[].path')
+ERSPAN_OVA=$(JFROG_CLI_LOG_LEVEL=ERROR jfrog rt s union-local/erspan/erspan*  --props=version=latest | jq '.[].path')
 echo $ERSPAN_OVA
 echo jfrog rt cp ${ERSPAN_OVA} "${H4CI_PUBLISHER_REPO}/${H4CI_TAG}/"
