@@ -30,11 +30,7 @@ pipeline {
   }
   post {
     success {
-      steps{
-        sh '''
-        echo Build is success
-        '''
-      }
+
       emailext (
         subject: "SUCCESSFUL: Release build ${h4ciTag}",
         body: """<p>SUCCESSFUL: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]':</p>
