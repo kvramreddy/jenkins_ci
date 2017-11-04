@@ -47,6 +47,6 @@ artifactory_upload() {
 args "$@"
 
 echo "==> Copy ERSPAN OVA"
-erspan_ova=$(jfrog rt s "union-local/erspan/erspan\\*" | jq -r '.[].path' | sort -nu | tail -1 )
+erspan_ova=$(JFROG_CLI_LOG_LEVEL=ERROR jfrog rt s union-local/erspan/erspan\\* | jq -r '.[].path' | sort -nu | tail -1 )
 echo $erspan_ova
-artifactory_upload rt cp $erspan_ova "sandbox-local/erspan/erspan-${H4CI_TAG}.ova"
+jfrog rt cp $erspan_ova "sandbox-local/erspan/erspan-${H4CI_TAG}.ova"
