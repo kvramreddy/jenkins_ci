@@ -47,6 +47,10 @@ artifactory_upload() {
 args "$@"
 
 echo "==> Copy ERSPAN OVA"
-erspan_ova=$(JFROG_CLI_LOG_LEVEL=ERROR jfrog rt s "union-local/erspan/erspan\\*" | jq -r '.[].path' | sort -nu | tail -1 )
-echo "Found path $erspan_ova"
-jfrog rt cp $erspan_ova "sandbox-local/erspan/erspan-${H4CI_TAG}.ova"
+erspan_ova=$(JFROG_CLI_LOG_LEVEL=ERROR jfrog rt s "union-local/erspan/erspan*" | jq -r '.[].path' | sort -nu | tail -1 )
+
+if [ ! -z "$erspan_ova"]; then
+  jfrog rt cp $erspan_ova "sandbox-local/erspan/erspan-${H4CI_TAG}.ova"
+else
+  echo "Cannot find last known good ERSPAN - $erspan_ova"
+fi
