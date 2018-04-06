@@ -23,7 +23,9 @@ pipeline {
                     echo $h4ciTag | grep -q -E '\\.devel$'
                     if [ $? -eq 0 ]; then
                       echo "DEV build"
-                      mysql -hdashboard.tetrationanalytics.com dashboard_db -e "select tag from cr_builds;"
+                      rel_branch="release-$(echo $h4ciTag | cut -c1-6)x"
+                      echo $rel_branch
+                      mysql -hdashboard.tetrationanalytics.com dashboard_db -e "select * from cr_builds where tag='$h4ciTag';"
                     fi
 
                   '''
