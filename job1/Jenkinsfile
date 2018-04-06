@@ -20,11 +20,12 @@ pipeline {
           }
           steps {
                   sh '''#!/bin/bash
-                    echo $h4ciTag | grep -q -E ".devel$"
+                    echo $h4ciTag | grep -q -E '\.devel$'
                     if [ $? -eq 0 ]; then
                       echo "DEV build"
+                      mysql -hdashboard.tetrationanalytics.com dashboard_db -e "select tag from cr_builds;"
                     fi
-                    mysql -hdashboard.tetrationanalytics.com dashboard_db -e "select tag from cr_builds;"
+
                   '''
             }
         }
