@@ -18,11 +18,12 @@ pipeline {
           agent {
             label 'el-7'
           }
-          def matcher = (${params.h4ciTag} ==~ /\.devel$/ )
-          if ( matcher ) {
-                sh(script: 'mysql -hdashboard.tetrationanalytics.com dashboard_db -e "select tag from cr_builds;"', returnStdout: true)
+          steps {
+            def matcher = (${params.h4ciTag} ==~ /\.devel$/ )
+            if ( matcher ) {
+                  sh(script: 'mysql -hdashboard.tetrationanalytics.com dashboard_db -e "select tag from cr_builds;"', returnStdout: true)
+            }
           }
-
         }
     }
 }
