@@ -18,9 +18,8 @@ pipeline {
           agent {
             label 'el-7'
           }
-          def status = sh(returnStatus: true, script: "echo \${params.h4ciTag} | grep -q -E '.devel\$'")
-          if (status == 0 ) {
-
+          def matcher = (${params.h4ciTag} ==~ /\.devel$/ )
+          if ( matcher ) {
                 sh(script: 'mysql -hdashboard.tetrationanalytics.com dashboard_db -e "select tag from cr_builds;"', returnStdout: true)
           }
 
