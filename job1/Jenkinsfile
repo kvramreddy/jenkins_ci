@@ -19,8 +19,10 @@ pipeline {
             label 'el-7'
           }
           steps {
-                  sh 'echo $h4ciTag | grep -q -E ".devel$"; echo \$?'
-                  sh 'mysql -hdashboard.tetrationanalytics.com dashboard_db -e "select tag from cr_builds;"'
+                  sh '''#!/bin/bash
+                    echo $h4ciTag | grep -q -E ".devel$" && echo \$?
+                    mysql -hdashboard.tetrationanalytics.com dashboard_db -e "select tag from cr_builds;"
+                  '''
             }
         }
     }
