@@ -22,7 +22,6 @@ pipeline {
 
                   sh 'mysql -hdashboard.tetrationanalytics.com dashboard_db -e "select tag from cr_builds;"'
             }
-          }
         }
     }
 }
