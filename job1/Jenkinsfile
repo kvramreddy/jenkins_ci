@@ -19,7 +19,7 @@ pipeline {
             label 'el-7'
           }
           steps {
-
+                  sh 'echo $h4ciTag'
                   sh 'mysql -hdashboard.tetrationanalytics.com dashboard_db -e "select tag from cr_builds;"'
             }
         }
