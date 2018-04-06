@@ -20,7 +20,7 @@ pipeline {
           }
           steps {
             def status = sh(returnStatus: true, script: "echo \${params.h4ciTag} | grep -q -E '.devel\$'")
-            if (status ) == 0 {
+            if (status == 0 ) {
 
                 sh(script: 'mysql -hdashboard.tetrationanalytics.com dashboard_db -e "select tag from cr_builds;"', returnStdout: true)
             }
