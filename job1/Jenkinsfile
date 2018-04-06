@@ -1,0 +1,34 @@
+pipeline {
+    agent none
+
+    parameters {
+        string(description: 'Git tag on which to base build', name: 'h4ciTag', defaultValue: '2.1.1.6.devel')
+    }
+
+    options {
+      timestamps()
+    }
+
+    environment {
+        GIT_LFS_SKIP_SMUDGE = '1'
+        HOME = '/home/h4re1'
+    }
+    stages {
+        stage('Update Dashboard') {
+          agent {
+            label 'el-7'
+          }
+          steps {
+            sh """
+              echo ${params.h4ciTag}
+              echo ${params.h4ciTag} | grep -q -E '.devel$'
+              ret=$?
+              if [ "$ret" -eq 0 ]; then
+                echo "[INFO: Upload Build Information to CR Build Management]"
+                mysql -hdashboard.tetrationanalytics.com dashboard_db -e "select tag from cr_builds;"
+              fi
+            """
+          }
+        }
+    }
+}
