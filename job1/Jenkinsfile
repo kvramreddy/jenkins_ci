@@ -20,8 +20,8 @@ pipeline {
           }
           steps {
             sh """
-              echo ${params.h4ciTag}
-              echo ${params.h4ciTag} | grep -q -E '.devel$'
+              echo "${params.h4ciTag}"
+              echo $h4ciTag | grep -q -E '.devel$'
               ret=$?
               if [ "$ret" -eq 0 ]; then
                 echo "[INFO: Upload Build Information to CR Build Management]"
