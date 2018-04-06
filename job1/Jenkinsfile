@@ -25,7 +25,7 @@ pipeline {
                       echo "DEV build"
                       rel_branch="release-$(echo $h4ciTag | cut -c1-6)x"
                       echo $rel_branch
-                      mysql -hdashboard.tetrationanalytics.com dashboard_db -e "select * from cr_builds where tag='$h4ciTag';"
+                      mysql -hdashboard.tetrationanalytics.com dashboard_db -e "INSERT INTO cr_builds (tag,branch,duration,jenkinsurl) VALUES ('$h4ciTag','$rel_branch',60,'$BUILD_URL');"
                     fi
 
                   '''
