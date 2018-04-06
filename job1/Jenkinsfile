@@ -21,10 +21,10 @@ pipeline {
           steps {
             sh """
               set -x
-              echo "${params.h4ciTag}"
+              echo ${params.h4ciTag}
               echo "$h4ciTag" | grep -q -E '.devel\$'
               ret=\$?
-              echo $ret
+              echo \$ret
               if [ "$ret" -eq 0 ]; then
                 echo "[INFO: Upload Build Information to CR Build Management]"
                 mysql -hdashboard.tetrationanalytics.com dashboard_db -e "select tag from cr_builds;"
